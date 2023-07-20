@@ -1,5 +1,8 @@
 package com.filipeoliveira.pocketmiibo.data.remote.models
 
-data class GameSeriesResponse(
-    val amiibo: List<AmiiboX>?
+import com.google.gson.annotations.SerializedName
+
+data class GameSeriesListResponse(
+    @SerializedName("amiibo")
+    val gameSeries: List<GameSeries>?
 )

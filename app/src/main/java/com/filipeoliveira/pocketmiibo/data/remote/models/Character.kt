@@ -1,8 +1,8 @@
 package com.filipeoliveira.pocketmiibo.data.remote.models
 
-import com.filipeoliveira.pocketmiibo.ui.models.AmiiboUI
+import com.filipeoliveira.pocketmiibo.ui.models.CharacterUI
 
-data class Amiibo(
+data class Character(
     val amiiboSeries: String?,
     val character: String?,
     val gameSeries: String?,
@@ -12,8 +12,8 @@ data class Amiibo(
     val tail: String?,
     val type: String?
 ) {
-    fun toUIModel() : AmiiboUI {
-        return AmiiboUI(
+    fun toUIModel() : CharacterUI{
+        return CharacterUI(
             amiiboSeries = amiiboSeries ?: "",
             character = character ?: "",
             gameSeries = gameSeries ?: "",
