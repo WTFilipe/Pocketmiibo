@@ -7,8 +7,9 @@ import com.filipeoliveira.pocketmiibo.ui.models.GameSeriesUI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class AmiiboRepositoryImpl(
+class AmiiboRepositoryImpl @Inject constructor (
     private val remoteDataSource: IAmiiboRemoteDataSource
 ) : IAmiiboRepository {
 

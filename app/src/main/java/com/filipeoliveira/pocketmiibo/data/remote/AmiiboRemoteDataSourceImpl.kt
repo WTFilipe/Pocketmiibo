@@ -5,8 +5,9 @@ import com.filipeoliveira.pocketmiibo.ui.models.CharacterUI
 import com.filipeoliveira.pocketmiibo.ui.models.GameSeriesUI
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class AmiiboRemoteDataSourceImpl(private val apiService: APIService): IAmiiboRemoteDataSource {
+class AmiiboRemoteDataSourceImpl @Inject constructor(private val apiService: APIService): IAmiiboRemoteDataSource {
 
     override suspend fun searchAmiiboByName(name: String): Flow<List<AmiiboUI>> = flow {
         val listInUIModel = apiService.getAmiiboListByName(string = name).amiibo?.filterNotNull()?.map {
