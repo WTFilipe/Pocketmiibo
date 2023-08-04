@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Pocketmiibo</string>
+
+    <string name="error_generic_feedback">Não foi possível carregar as informações. Por favor, tente novamente.</string>
+    <string name="error_no_connection_feedback">Não foi possível conectar com a internet. Ative os dados móveis ou Wifi e tente novamente.</string>
+    <string name="error_slow_connection_feedback">A conexão parece estar lenta. Por favor, conecte-se à uma rede Wifi e tente novamente.</string>
 </resources>

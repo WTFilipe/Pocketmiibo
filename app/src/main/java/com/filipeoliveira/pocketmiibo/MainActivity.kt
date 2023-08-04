@@ -17,9 +17,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.filipeoliveira.pocketmiibo.ui.AmiiboItem
+import com.filipeoliveira.pocketmiibo.ui.composables.AmiiboItem
+import com.filipeoliveira.pocketmiibo.ui.composables.DefaultError
+import com.filipeoliveira.pocketmiibo.ui.composables.DefaultLoading
 import com.filipeoliveira.pocketmiibo.ui.models.AmiiboUI
-import com.filipeoliveira.pocketmiibo.ui.models.UIState
 import com.filipeoliveira.pocketmiibo.ui.theme.PocketmiiboTheme
 import com.filipeoliveira.pocketmiibo.ui.viewmodel.AmiiboViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,21 +44,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun Home(viewModel: AmiiboViewModel) {
-    val screenState = viewModel.amiiboListResponseUIState.collectAsState()
-    viewModel.searchAmiiboByName("mario")
-    when (screenState.value) {
-        is UIState.Loading -> ShowLoading()
-        is UIState.Error -> ShowError()
-        is UIState.Success -> ShowList(list = screenState.value as UIState.Success)
+    val screenState = viewModel.amiiboListResponseUIState.collectAsState().value
+    when {
+        screenState.isLoading -> ShowLoading()
+        screenState.isError -> ShowError(screenState.error){
+//            viewModel.searchAmiiboByName("mario")
+        }
+        screenState.isSuccess -> ShowList(amiiboList = screenState.amiiboList)
     }
 }
 
 @Composable
 fun ShowList(
     modifier: Modifier = Modifier,
-    list: UIState.Success<List<AmiiboUI>>
+    amiiboList: List<AmiiboUI>
 ) {
-    val amiiboList = list.data
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -77,13 +78,15 @@ fun ShowList(
 }
 
 @Composable
-fun ShowError(){
-
+fun ShowError(error: Throwable?, onErrorClicked: () -> Unit) {
+    DefaultError(throwable = error) {
+        onErrorClicked()
+    }
 }
 
 @Composable
 fun ShowLoading(){
-
+    DefaultLoading()
 }
 
 @Preview(showBackground = true)
