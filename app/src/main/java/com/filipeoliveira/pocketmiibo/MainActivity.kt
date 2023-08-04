@@ -15,8 +15,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.filipeoliveira.pocketmiibo.ui.AmiiboItem
 import com.filipeoliveira.pocketmiibo.ui.models.AmiiboUI
 import com.filipeoliveira.pocketmiibo.ui.models.UIState
@@ -33,7 +33,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PocketmiiboTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     Home(viewModel)
                 }
@@ -62,12 +61,15 @@ fun ShowList(
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = modifier.padding(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = modifier.padding(horizontal = dimensionResource(id = R.dimen.dimen_16dp)),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.dimen_8dp)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.dimen_8dp))
     ) {
         items(amiiboList) { amiibo ->
-            AmiiboItem(item = amiibo) {
+            AmiiboItem(
+                item = amiibo
+
+            ) {
 
             }
         }
